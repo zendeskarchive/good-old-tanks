@@ -60,7 +60,7 @@ In order to start you need to give your bot a name. To do that call http://10.12
 E.g. in order to register player named "Johnny" for tournament "main" use:
 
 ```
-mabn@hackkrk$ curl -w"\n" 'http://10.12.202.141:9999/tournaments/main/players/Johnny' -X POST -H 'Content-Type: application/json' -H 'Authorization: Secret'
+mabn@hackkrk$ curl -w"\n" 'http://10.12.202.141:9999/tournaments/master/players/Johnny' -X POST -H 'Content-Type: application/json' -H 'Authorization: Secret'
 {
   "name" : "Johnny",
   "color" : "#ff0000"
@@ -73,7 +73,7 @@ mabn@hackkrk$
 After you've registered your player name games including Your tank will start from time to time. The best way to know when a game is starting is to try to fetch its setup:
 
 ```
-curl -w"\n" 'http://10.12.202.141:9999/tournaments/main/games/my/setup' -H 'Authorization: Secret' -H 'Content-Type: application/json'
+curl -w"\n" 'http://10.12.202.141:9999/tournaments/master/games/my/setup' -H 'Authorization: Secret' -H 'Content-Type: application/json'
 {
   "name" : "main game #1",
   "scene" : {
@@ -118,7 +118,7 @@ Note: *player name is a unique identifier for* players and tanks. You can treat 
 You can submit a move at any time during the game (preferably every turn). The call will block until the next turn is processed and will return the turn outcome.
 
 ```
-mabn@hackkrk$ curl 'http://10.12.202.141:9999/tournaments/main/moves' -H 'Content-Type: application/json' -H 'Authorization: MagnanimousHoneyDewWombatPony' --data-binary $'{\n  "shotAngle": 0,\n  "shotPower": 0,\n  "moveDistance": 10\n}'
+mabn@hackkrk$ curl 'http://10.12.202.141:9999/tournaments/master/moves' -H 'Content-Type: application/json' -H 'Authorization: MagnanimousHoneyDewWombatPony' --data-binary $'{\n  "shotAngle": 0,\n  "shotPower": 0,\n  "moveDistance": 10\n}'
 {
   "number" : 94,                <- turn number
   "requestedMoves" : [ {
@@ -164,7 +164,7 @@ You should be sending moves in a loop:
 - do some magic, calculate stuff, decide what to do
 - send a move
 
-You can do that until the response contains `last: true` which means it was the last turn. You are expected to go back to waiting for the next game at this point (using `tournaments/main/games/my/setup` endpoint)
+You can do that until the response contains `last: true` which means it was the last turn. You are expected to go back to waiting for the next game at this point (using `tournaments/master/games/my/setup` endpoint)
 
 #### What is shotAngle, shotPower and moveDistance?
 
