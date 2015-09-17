@@ -7,9 +7,11 @@ Your mission today it to take control of a real tank! You will compete with othe
 - the main tournament where you compete against others:
     - server: http://10.12.202.141:9999/ (swagger api documentation)
     - UI: http://10.12.202.140:8080/launcher.html
+    - tournamentId "master"
 - sandbox where you can freely test your bots:
     - server: http://10.12.202.144:9999/
     - UI: http://10.12.202.144:8080/launcher.html
+    - tournamentId "sandbox-1" through "sandbox-5" - look at the back of the note you've received for the proper number
 - sample bots:
 	- [java](java/)
 	- [ruby](ruby/)
