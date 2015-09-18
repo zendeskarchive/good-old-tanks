@@ -45,7 +45,7 @@ Finally, 4 players with highest scores will be invited to the final tournament a
 
 ## Difficulty
 
-First games will start wiht flat terrains so that you can learn in easy environment. Throughout the tournament, landscapes will become more challenging - having more hills and being more steep.
+First games will start with flat terrains so that you can learn in easy environment. Throughout the tournament, landscapes will become more challenging - having more hills and being more steep.
 
 # How do I play?
 
