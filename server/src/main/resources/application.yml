@@ -1,0 +1,48 @@
+http:
+  async:
+    timeout: 30
+filter:
+  uncompressed:
+    warn: true
+    fail: false
+tournament:
+  limit: 1
+storage:
+  location: tournaments/
+  save:
+    enabled: true
+    async: true
+  backup:
+    enabled: false
+  test.load:
+    enabled: false
+    fail.fast: false
+server:
+  port: 9999
+  tomcat:
+    compression: on
+    compressableMimeTypes: application/json
+    accessLogEnabled: true
+    accessLogPattern: '%h %l %u %t "%r" %s %bb %Dms "Auth: %{Authorization}i" "Content-Encoding: %{Content-Encoding}o" "Accept-Encoding: %{Accept-Encoding}i"'
+    basedir: tomcat/
+# if true will show swing ui displaying most recent turn
+debug.ui: true
+---
+spring:
+  profiles: development
+http:
+  async:
+    timeout: 600
+tournament:
+  limit: 100
+storage:
+  location: build/tmp/tournaments/${random.long}/
+  save:
+    async: false
+  test.load:
+    enabled: true
+    fail.fast: true
+server:
+  tomcat:
+    basedir: build/tmp/tomcat/${random.long}/
+debug.ui: true

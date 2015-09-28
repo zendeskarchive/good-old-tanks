@@ -1,0 +1,144 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.5.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'io.spring.dependency-management'
+
+jar {
+    baseName = 'server'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    versions = [
+            lombok      : '1.16.4',
+            groovy      : '2.4.4',
+
+            commons     : [
+                    lang3: '3.4',
+                    math3: '3.5'
+            ],
+            guava : '19.0-rc1',
+            jts: '1.13',
+            vectorz: '0.50.0',
+
+            // test
+            spock       : '1.0-groovy-2.4',
+            http_builder: '0.7.1',
+            awaitility  : '1.6.3',
+            jersey: '1.8',
+            jackson: '2.6.1',
+            newrelic: '3.20.0'
+    ]
+}
+
+configurations {
+    all {
+        exclude group: 'org.codehaus.groovy', module: 'groovy'
+    }
+
+//    FIXME this does not work with eclipse:
+//    runtime {
+//        exclude group: 'org.projectlombok', module: 'lombok'
+//    }
+    newrelic    // Custom configuration to allow for the copying of the New Relic agent at run time.
+}
+
+springBoot {
+    // newrelic -javaagent:...
+    // agent = file("$buildDir/lib/newrelic.jar")   
+}
+bootRun {
+    // always or detect. but detect doesn't work well...
+    jvmArgs = ['-Dspring.output.ansi.enabled=always']
+}
+
+tasks.withType(org.springframework.boot.gradle.run.BootRunTask) {
+    systemProperty('newrelic.config.file', "src/main/resources/newrelic.yml")
+  }
+
+dependencies {
+    newrelic ("com.newrelic.agent.java:newrelic-agent:$versions.newrelic")
+    compile(
+            // Spring Boot
+            "org.springframework.boot:spring-boot-starter-web",
+
+            "org.projectlombok:lombok:$versions.lombok",
+            "org.codehaus.groovy:groovy-all:$versions.groovy",
+
+            // commons
+            "org.apache.commons:commons-lang3:$versions.commons.lang3",
+            "com.google.guava:guava:$versions.guava",
+            
+            // simulation
+            "com.vividsolutions:jts:$versions.jts",
+            "net.mikera:vectorz:$versions.vectorz",
+            "org.apache.commons:commons-math3:$versions.commons.math3",
+
+            // Jackson
+            "com.fasterxml.jackson.datatype:jackson-datatype-jdk8",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+            
+            //
+            "org.apache.httpcomponents:httpclient:4.5",
+            'org.glassfish.jersey.core:jersey-client:2.21',
+            'com.mangofactory:swagger-springmvc:1.0.2',
+            'org.fusesource.jansi:jansi:1.11',
+            "com.newrelic.agent.java:newrelic-api:$versions.newrelic",
+    )
+
+    testCompile(
+            // Spring Boot
+            "org.springframework.boot:spring-boot-starter-test",
+
+            "org.spockframework:spock-spring:$versions.spock",
+
+            "org.codehaus.groovy.modules.http-builder:http-builder:$versions.http_builder",
+            "com.jayway.awaitility:awaitility-groovy:$versions.awaitility",
+    )
+}
+
+test {
+    systemProperty 'endless', System.properties.endless
+}
+
+eclipse {
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
+task copyAgent(type: Copy) {
+    from {
+        configurations.newrelic
+    }
+    into "$buildDir/lib"
+    rename ("newrelic-agent-${versions.newrelic}.jar", 'newrelic.jar')
+}
+
+project.tasks.build.dependsOn([copyAgent])

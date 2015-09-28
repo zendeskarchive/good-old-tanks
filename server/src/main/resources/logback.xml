@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+   	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+   	
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p %mdc{tid} [%t] %logger : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%rEx}</pattern>
+		</encoder>
+		<file>logs/spring.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>logs/spring.log.%i</fileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %-8.8mdc{tid} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%rEx}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	
+	<logger name="com.getbase.hackkrk.tanks" level="INFO"/>
+    <logger name="com.getbase.hackkrk.tanks.server.TournamentRepository" level="WARN"/>
+    
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

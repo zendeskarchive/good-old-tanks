@@ -1,2 +1,26 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# Does not ignore anything is source folders
+!**/src/**
+
+*.pyc
+
+**/dist/
+**/node_modules/
+**/.idea/
+**/*.iml
+**/server/env
+sample/target
+spring.log
+Gemfile.lock
+
 /com/
 java/target

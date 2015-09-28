@@ -1,0 +1,9 @@
+module.exports =
+  width: 1000
+  height: 480
+  worldWidthDelta: 500
+  singleTurnTime: 800
+  scalingFactor: 1
+  pack: 'assets/pack.json'
+  gameServerUrl: 'http://localhost:9999/tournaments/'
+  gameServerUrlDev: 'http://localhost:9988/tournaments'

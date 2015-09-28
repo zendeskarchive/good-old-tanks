@@ -2,19 +2,34 @@ Welcome to the HackKrk!
 
 Your mission today it to take control of a real tank! You will compete with others to achieve the glorious victory.
 
+# How to run HackKrk Tank application
+
+HackKrk Tanks application consists of two servers:
+ - [backend application](server/)
+ - [ui](ui/)
+
+## Backend application run and setup
+
+### Build and run
+ - build and run server using gradle: *./gradlew bootRun*
+
+### Creating tournament
+ - create tournament: [SWAGGER UI will help you with that matter](http://localhost:9999/#!/tournament-controller/createTournament)
+ - start tournament: [SWAGGER UI again](http://http://localhost:9999/#!/tournament-controller/startGame)
+ - __IMPORTANT:__ remember to save admin (for tournament parameters tuning) and players tokens (for players registration/authentication)
+
+## UI application run and setup
+ - follow the [instruction](ui/README.md)
+
 # Important Links
 
-- the main tournament where you compete against others:
-    - server: http://10.12.202.141:9999/ (swagger api documentation)
-    - UI: http://10.12.202.140:8080/launcher.html
-    - tournamentId "master"
-- sandbox where you can freely test your bots:
-    - server: http://10.12.202.144:9999/
-    - UI: http://10.12.202.144:8080/launcher.html
-    - tournamentId "sandbox-1" through "sandbox-5" - look at the back of the note you've received for the proper number
+- custom created tournament details:
+    - server: [http://localhost:9999](http://localhost:9999) (swagger api documentation)
+    - UI: [http://localhost:8080/launcher.html](http://localhost:8080/launcher.html)
+    - tournamentId <your_tournament_id>
 - sample bots:
-	- [java](java/)
-	- [ruby](ruby/)
+	- [java](clients/java/)
+	- [ruby](clients/ruby/)
 
 # The game
 When a game starts your tank will be placed with others on a randomly generated map. From now on every few seconds a new turn happens during which tanks perform their actions. 
@@ -31,11 +46,11 @@ The game lasts until there is only 1 tank remaining or 200 turns has passed. The
 
 ## The tournament
 
-Tournament is made of succeeding games. For every game, players are randomely choosen out of the players that didn't play recently. If all players played a game, then members of next game will be selected from entire pool, and so on.
+Tournament is made of succeeding games. For every game, players are randomly chosen out of the players that didn't play recently. If all players played a game, then members of next game will be selected from entire pool, and so on.
 
 ## Score
 
-Every player that survives a game will get a score for their remaining health points. Additionaly, every successful shot will be also scored (even though player might have been destroyed)
+Every player that survives a game will get a score for their remaining health points. Additionally, every successful shot will be also scored (even though player might have been destroyed)
 
 Scoring Formula for a game: `[remaining health points] * HP_SCORE + [successful shots] * SHOT_SCORE`
 
@@ -199,3 +214,9 @@ The diameter is around 30
 
 #### What exactly is the position of a tank?
 It's the position of it's central point. It's always on the ground (as described by landscape points)
+
+#License
+
+MIT
+
+
