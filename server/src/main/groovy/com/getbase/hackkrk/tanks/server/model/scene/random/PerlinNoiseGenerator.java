@@ -4,6 +4,8 @@ package com.getbase.hackkrk.tanks.server.model.scene.random;
 import java.util.Random;
 
 /**
+ * Source: https://github.com/Bukkit/Bukkit
+ * 
  * Generates noise using the "classic" perlin generator
  */
 public class PerlinNoiseGenerator extends NoiseGenerator {
