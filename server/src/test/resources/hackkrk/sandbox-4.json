@@ -1,0 +1,63 @@
+{
+  "id": "sandbox-4",
+  "adminToken": "RycqhOLbG6aqELYuhpJIyz6xmgLGDQMf",
+  "configuration": {
+    "pauseRequested": false,
+    "millisBetweenGames": 5000,
+    "millisBetweenTurns": 1000,
+    "maxTurns": 200,
+    "pointsForHp": 50,
+    "pointsForSuccessfulShot": 1000,
+    "maxPlayersPerGame": 4,
+    "inactivePlayers": [],
+    "landscapeDifficulty": 40,
+    "physicsTemplate": {
+      "wind": -15.0,
+      "gravity": -9.81,
+      "maxShotPower": 100.0,
+      "airDragCoefficient": 0.001,
+      "initialTankHealth": 100,
+      "bulletDamage": 50.0,
+      "mapTopology": {
+        "type": ".BoundedMapTopology"
+      },
+      "tankDiameter": 30.0,
+      "tankTurretHeight": 10.0,
+      "turretLength": 15.0,
+      "maxMovePerTurn": 30.0,
+      "maxMoveSpeed": 2.0,
+      "unitOfTime": 0.3,
+      "maxSimulationIterationsPerTurn": 1000.0,
+      "powerMultiplier": 1.5
+    },
+    "physicsDifficulty": 1,
+    "physicsWindMean": 0.0,
+    "physicsWindStdev": 1.0,
+    "physicsGravityMean": -9.0,
+    "physicsGravityStdev": 0.5,
+    "physicsAirDragBase": 0.002,
+    "physicsAirDragMean": 0.001,
+    "physicsAirDragStdevMultiplier": 0.001
+  },
+  "userTokens": [
+    "WaryCoralCockroachGoose",
+    "ResponsibleBrownMallardAlligator",
+    "PolitePaleVioletRedSheepApe",
+    "IndulgentPinkStarlingMink",
+    "IdealisticPinkSwallowGorilla",
+    "FlawlessBluePigeonSquid",
+    "FearlessPinkTigerPheasant",
+    "BraveGoldGoosePeafowl"
+  ],
+  "players": [],
+  "playerAccessTokens": {},
+  "games": [],
+  "submittedMoves": {},
+  "ranking": {
+    "score": {}
+  },
+  "state": {
+    "type": "inactive",
+    "previous": null
+  }
+}

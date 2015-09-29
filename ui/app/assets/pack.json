@@ -1,0 +1,42 @@
+{
+  "good-old-tanks": [
+    {
+      "type" : "image",
+      "key"  : "bg_landscape",
+      "url"  : "assets/gradient_background.png"
+    },
+    {
+      "type" : "image",
+      "key"  : "tank",
+      "url"  : "assets/tank.png"
+    },
+    {
+      "type" : "image",
+      "key"  : "tank_shadow",
+      "url"  : "assets/tank_shadow.png"
+    },
+    {
+      "type" : "image",
+      "key"  : "flame",
+      "url"  : "assets/flame_small.png"
+    },
+    {
+      "type" : "audio",
+      "key"  : "grenade",
+      "urls" : ["assets/grenade.mp3"],
+      "autoDecode": true
+    },
+    {
+      "type" : "audio",
+      "key"  : "aagun",
+      "urls" : ["assets/aagun.mp3"],
+      "autoDecode": true
+    },
+    {
+      "type" : "audio",
+      "key"  : "game_end",
+      "urls" : ["assets/game_end.mp3"],
+      "autoDecode": true
+    }
+  ]
+}

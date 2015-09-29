@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good Old Tanks - Game launcher</title>
+</head>
+<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 content">
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive !important;
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+        .well {
+            color: #000 !important;
+        }
+
+        .list-group {
+            display: inline;
+        }
+        .list-group-item {
+            background-color: #000 !important;
+            color: #fff !important;
+        }
+
+        a {
+            margin-right: 25px;
+            color: #82E5FF;
+        }
+
+        a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+    </style>
+    <script>
+
+        endpoint = 'localhost:9999'
+
+        function main() {
+
+            reloadTime = 10000
+
+            $.ajax({
+                url: "http://" + endpoint + "/tournaments"
+            }).done(function (jsonData) {
+
+                htmlPart = $('<div></div>')
+
+                for (tournament in jsonData) {
+                    htmlPart.append("<br><h4 class='" + tournament + "'>Tournament: " + tournament + "</h4>")
+                    htmlPart.append("<a href='ranking.html?tournamentId=" + tournament + "'><h5>Ranking</h5></a><br>")
+
+                    htmlPart.append(
+                            "<a href='/?tournamentId=" + tournament + "&tail=true'>" +
+                            "current game" +
+                            "</a><br>")
+                    jsonData[tournament].reverse().forEach(function (element) {
+                        htmlPart.append(
+                                "<a href='/?tournamentId=" + tournament + "&gameId=" + element + "'>" +
+                                "game " + element +
+                                "</a><br>")
+                    })
+                }
+
+                $('.content').html(htmlPart)
+            })
+
+            setTimeout(function() {
+                main()
+            }, reloadTime)
+        }
+
+
+        main()
+
+    </script>
+</body>
+</html>
