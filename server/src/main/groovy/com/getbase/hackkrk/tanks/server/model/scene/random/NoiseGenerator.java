@@ -1,6 +1,8 @@
 package com.getbase.hackkrk.tanks.server.model.scene.random;
 
 /**
+ * Source: https://github.com/Bukkit/Bukkit
+ * 
  * Base class for all noise generators
  */
 public abstract class NoiseGenerator {
